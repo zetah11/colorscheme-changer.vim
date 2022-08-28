@@ -15,18 +15,6 @@ if exists('g:nightTime')
     let s:nightTime = g:nightTime
 endif
 
-" Define the colorscheme used by day
-let s:dayColorscheme = 'blue'
-if exists('g:dayColorscheme')
-    let s:dayColorscheme = g:dayColorscheme
-endif
-
-" Define the colorscheme used by night
-let s:nightColorscheme = 'darkblue'
-if exists('g:nightColorscheme')
-    let s:nightColorscheme = g:nightColorscheme
-endif
-
 " Convert a time as HH:MM:SS to the number of milliseconds from
 " the beginning of the day 00:00:00
 function! s:ToMilliseconds(H, M, S)
@@ -59,13 +47,13 @@ endfunction
 " a trigger for the job which will change the colorscheme
 function! ScheduleNewColorscheme(timer)
     " Define colorscheme and next time depending on time of day
-    let isDayTime       = s:IsDayTime()
-    let newColorscheme  = isDayTime ? s:dayColorscheme : s:nightColorscheme
-    let targetDate      = isDayTime ? s:nightTime : s:dayTime
+    let isDayTime     = s:IsDayTime()
+    let newBackground = isDayTime ? 'light' : 'dark'
+    let targetDate    = isDayTime ? s:nightTime : s:dayTime
 
     " Set new colorscheme
-    echom 'setting colorscheme ' . newColorscheme . ' at ' . strftime('%H:%M')
-    execute 'colorscheme ' . newColorscheme
+    echom 'setting background ' . newBackground . ' at ' . strftime('%H:%M')
+    execute 'set background=' . newBackground
 
     let currentDate = [strftime('%H'), strftime('%M'), strftime('%S')]
     let startDelay = s:TimeDiff(currentDate, targetDate) + 2000
