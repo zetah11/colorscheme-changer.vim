@@ -1,6 +1,8 @@
 # colorscheme-changer.vim
 
-Change your colorscheme depending on the hour of the day
+Change your background depending on the hour of the day. The original changes
+the colorscheme; this just uses `set colorscheme=light` or
+`set colorscheme=dark` depending on the time of day.
 
 # What is it?
 
